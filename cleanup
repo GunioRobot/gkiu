@@ -1,0 +1,15 @@
+#!/bin/env sh
+
+echo Run make clean
+make clean
+
+echo This script will delete '*~', '*.bak', '#*', and 'Makefile'
+
+find . -name *~	-exec rm  {} \;
+find . -name *.bak	-exec rm  {} \;
+find . -name \#*	-exec rm {} \;
+find . -name Makefile -exec rm {} \;
+
+rm -rf Debug
+
+echo The end

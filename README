@@ -1,0 +1,46 @@
+<<<<<<< HEAD
+GnomeQQ Version C == GKiu.
+=======
+GQQ全称GnomeQQ，是为了弥补Linux（GNOME环境）下缺少QQ客户端而开发的。GQQ是基于MyQQ3的GUI程序，MyQQ3创立于QQ 2009协议基础，是纯C开发的，并包含一个控制台QQ程序。MyQQ3的项目主页在：http://myqq3.googlecode.com
+
+目前Linux下并没有好的QQ客户端，QQ for Linux虽然是官方出品但是功能弱小，不能满足我们的使用。Eva是为KDE开发的，总之在我这里从来没有一次成功执行过。LumaQQ已经很久没更新过了。WebQQ却局限于网页浏览器，不能发掘更大的潜力。
+
+GQQ项目包括两个子项目——[DeskQ]和GQQ。DeskQ是使用WebKit引擎将WebQQ本地化，并支持友好的提示和托盘隐藏功能（已经做完了）。
+
+由于开学，时间局促，无法全力投入开发，因此特召集各位C/C++高手加入GQQ开发计划！联系： zhtx10@gmail.com。有时间会与您联系
+
+开发目标（根据实际情况随时变动）：
+
+1.作为先前的替代，完善DeskQ并放出。（完成）
+
+2.修正DeskQ的BUG，终止DESKQ子项目。（完成）
+
+3.研究MyQQ3的接口，修复一些在Linux下的BUG，并制作C++封装——LibQQmm。（跳过，可能会放弃LibQQmm的开发）
+
+--> 临时加入：完成接口层，对LibQQ进行修改以适合接口层，并对LibQQ进行扩容，以完整发挥MyQQ作用，或直接使用MyQQ接口。
+
+4.完成基本GUI，实现登录、抓取列表功能。（加紧进行）
+
+5.修正BUG。
+
+6.可以与好友、群进行联系，有简单的表情功能。
+
+7.修正BUG。
+
+8.自定义表情发送与显示。
+
+9.完善GUI。
+
+10.换肤功能。
+
+11.全局BUG修复。
+
+开发维护者（如果与gnome-qq文件夹内AUTHORS不同，以AUTHORS为准）：
+DeskQ:
+ * zhtx (zhtx10@gmail.com)
+Gnome QQ:
+ * zhtx (zhtx10@gmail.com)
+ * imfeng (huishufeng@gmail.com)
+ * caoyu (caoyu1099@yahoo.cn)
+ * Devil Wang (wxjeacen@gmail.com)
+>>>>>>> 1695f3232c6e01c59f9d5a04ee45b0bca76e14d5
