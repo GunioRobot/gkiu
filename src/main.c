@@ -48,7 +48,7 @@ main (int argc,
 #else
 	dbg_init(DBG_FLOG);
 #endif
-	dbg_print(_("DBG: Debug system is init!"));
+	dbg_print("DBG: Debug system is init!");
 
 	/* Keyring */
 	//keyring_init ();

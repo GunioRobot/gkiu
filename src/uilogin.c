@@ -119,6 +119,6 @@ lw_create(void)
 	
 	g_object_unref (builder);
 
-	dbg_print(_("DBG: Login Window is created."));
+	dbg_print("DBG: Login Window is created.");
 	return window;
 }
