@@ -37,10 +37,18 @@
 #endif
 
 
-GtkWidget* window = NULL;
-GtkWidget* ety_pwd = NULL;
-GtkWidget* cbb_usr = NULL;
+GtkWidget* window = NULL;		/*GtkWindow*/
+GtkWidget* ety_pwd = NULL;		/*GtkEntry*/
+GtkWidget* cbb_usr = NULL;		/*GtkComboBoxEntry*/
 
+/**
+ cbb_usr callback : for get UsrList
+ */
+void
+get_usrlist(gchar *usr)
+{
+	gtk_combo_box_append_text (GTK_COMBO_BOX (cbb_usr), usr);
+}
 
 /**
  btn_login callback : (signal) clicked
@@ -91,15 +99,24 @@ lw_create(void)
 
 	/* This is important */
 	gtk_builder_connect_signals (builder, NULL);
+	/* get gtk widget from builder */
 	window = GTK_WIDGET (gtk_builder_get_object (builder, "window"));
 	ety_pwd = GTK_WIDGET (gtk_builder_get_object (builder, "ety_pwd"));
 	cbb_usr = GTK_WIDGET (gtk_builder_get_object (builder, "cbb_usr"));
 
+	/* set up window */
 	gtk_window_set_position (GTK_WINDOW(window), GTK_WIN_POS_CENTER_ALWAYS);
-	
+
+	/* set up password entry  */
 	gtk_entry_set_visibility (GTK_ENTRY(ety_pwd), FALSE);
 	gtk_entry_set_invisible_char (GTK_ENTRY(ety_pwd), '*');
 
+	/* set up user combo box */
+	GtkListStore *usr_lst = gtk_list_store_new (1, G_TYPE_STRING);
+	gtk_combo_box_set_model (GTK_COMBO_BOX (cbb_usr), GTK_TREE_MODEL (usr_lst));
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(cbb_usr), 0); 
+	cfg_get_lists_usrlist (&get_usrlist);
+	
 	g_object_unref (builder);
 
 	dbg_print(_("DBG: Login Window is created."));

@@ -177,6 +177,7 @@ cfg_add_user_to_list (char *usrnam)
 	GString *buf = NULL;
 	gsize len = 0;
 	gint i;
+	
 	lst = g_key_file_get_string_list (fcfg, CFG_LISTS, CFG_LISTS_USRLIST,
 	                                  &len, NULL);
 	if (!lst)
