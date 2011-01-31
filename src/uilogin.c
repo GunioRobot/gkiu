@@ -109,7 +109,7 @@ lw_create(void)
 
 	/* set up password entry  */
 	gtk_entry_set_visibility (GTK_ENTRY(ety_pwd), FALSE);
-	gtk_entry_set_invisible_char (GTK_ENTRY(ety_pwd), '*');
+	//gtk_entry_set_invisible_char (GTK_ENTRY(ety_pwd), '*');
 
 	/* set up user combo box */
 	GtkListStore *usr_lst = gtk_list_store_new (1, G_TYPE_STRING);

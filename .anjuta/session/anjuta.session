@@ -1,13 +1,13 @@
 
 [Anjuta]
 Maximized=1
-Geometry=1303x711+0+28
+Geometry=1303x712+0+28
 
 [Project Manager]
 Shortcut=E file:///home/zhtx/gkiu/src gkiu 
 
 [File Loader]
-Files=file:///home/zhtx/gkiu/src/uilogin.c#122%%%file:///home/zhtx/gkiu/src/debug.h#5%%%file:///home/zhtx/gkiu/src/main.c#51
+Files=file:///home/zhtx/gkiu/src/uilogin.c#113%%%file:///home/zhtx/gkiu/src/debug.h#5%%%file:///home/zhtx/gkiu/src/main.c#61
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n

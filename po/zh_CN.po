@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-30 21:52+0800\n"
-"PO-Revision-Date: 2011-01-30 21:57+0800\n"
+"PO-Revision-Date: 2011-01-31 19:19+0800\n"
 "Last-Translator: Mike Ma <zhtx10@gmail.com>\n"
 "Language-Team: Chinese <zhtx10@gmail.com>\n"
 "Language: Chinese\n"
@@ -74,7 +74,7 @@ msgstr "密码："
 
 #: src/uilogin.glade:73
 msgid "Appear offline"
-msgstr "隐身："
+msgstr "隐身"
 
 #: src/uilogin.glade:88
 msgid "Save the password"
