@@ -6,9 +6,6 @@ Geometry=1303x712+0+28
 [Project Manager]
 Shortcut=E file:///home/zhtx/gkiu/src gkiu 
 
-[File Loader]
-Files=file:///home/zhtx/gkiu/src/keyring.c#27%%%file:///home/zhtx/gkiu/src/uilogin.c#70%%%file:///home/zhtx/gkiu/src/debug.h#16%%%file:///home/zhtx/gkiu/src/keyring.h#1
-
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
 

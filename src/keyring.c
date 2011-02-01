@@ -40,15 +40,18 @@ void
 keyring_savepwd (const char *usr, 
                  const char *pwd)
 {
+	GString *des = g_string_new ("");
+	g_string_sprintf (des, "GKiu_%s", usr);
 	gnome_keyring_store_password (GNOME_KEYRING_NETWORK_PASSWORD,
 	                              GNOME_KEYRING_DEFAULT,
-	                              usr, pwd, 
+	                              des->str, pwd, 
 	                              &save_callback,
 	                              NULL/*user data*/, NULL /*destory modify*/,
 	                              /* User attributes */
 	                              "user", usr,
 	                              "server", "gkiu",
 	                              NULL); /* End with NULL */
+	g_string_free (des, TRUE);
 }
 
 /**
@@ -64,14 +67,13 @@ keyring_findpwd (const char *usr,
 	                                  "server", "gkiu",
 	                                  NULL);
 }
+
 /**
  Delete a password from default keyring
  */
-
 void 
 keyring_delpwd (const char *usr)
 {
-	g_print ("%s\n", usr);
 	int ret =
 	gnome_keyring_delete_password_sync (GNOME_KEYRING_NETWORK_PASSWORD,
 	                                    "user", usr,

@@ -61,10 +61,13 @@ void
 on_btn_login_clicked(GtkWidget *widget,
                      gpointer data)
 {
+	/* Add the current user to list */
+	cfg_add_user_to_list (gtk_combo_box_get_active_text (GTK_COMBO_BOX (cbb_usr)));
+	
 	/* TODO: 这里暂未考虑已存储的密码 */
 	gboolean save_pwd = FALSE;
 	GString *user = g_string_new (gtk_combo_box_get_active_text (GTK_COMBO_BOX (cbb_usr)));
-/* THERE IS TEST CODE
+
 	save_pwd = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chb_svpwd));
 	if (save_pwd == TRUE)
 	{
@@ -72,14 +75,13 @@ on_btn_login_clicked(GtkWidget *widget,
 		keyring_savepwd (user->str,gtk_entry_get_text (GTK_ENTRY (ety_pwd)));
 	}
 	
+/* THERE IS TEST CODE
 	char *pwd;
 	keyring_findpwd (user->str,&pwd);
 	g_print ("Password is %s\n", pwd);
 	
 	keyring_delpwd (user->str);
 */
-	/* Add the current user to list */
-	cfg_add_user_to_list (gtk_combo_box_get_active_text (GTK_COMBO_BOX (cbb_usr)));
 }
 
 /**
