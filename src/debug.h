@@ -7,9 +7,9 @@
 // Infomation to...
 enum
 {
-	DBG_TERM,
-	DBG_FLOG,
-	DBG_NONE,
+	DBG_TERM, /* -> stdout         */
+	DBG_FLOG, /* -> ~/.gkiu/applog */
+	DBG_NONE  /* -> ???            */
 };
 
 // functions

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(gkiu, 0.1, http://github.com/ekd123/gqq)
+AC_INIT(gkiu, 0.0, http://github.com/gqqdev/gkiu)
 
 PACKAGE_LOCALE_DIR="$(datadir)/locale"
 AC_SUBST(PACKAGE_LOCALE_DIR)
@@ -37,7 +37,7 @@ AM_PROG_LIBTOOL
 
 
 
-PKG_CHECK_MODULES(GKIU, [glib-2.0 >= 2.18 gnome-keyring-1 gtk+-2.0])
+PKG_CHECK_MODULES(GKIU, [glib-2.0 >= 2.18 gnome-keyring-1 gtk+-2.0 gio-2.0])
 
 
 

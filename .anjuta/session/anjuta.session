@@ -7,7 +7,7 @@ Geometry=1303x712+0+28
 Shortcut=E file:///home/zhtx/gkiu/src gkiu 
 
 [File Loader]
-Files=file:///home/zhtx/gkiu/src/uilogin.c#113%%%file:///home/zhtx/gkiu/src/debug.h#5%%%file:///home/zhtx/gkiu/src/main.c#61
+Files=file:///home/zhtx/gkiu/src/debug.h#7
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n

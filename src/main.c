@@ -49,9 +49,6 @@ main (int argc,
 	dbg_init(DBG_FLOG);
 #endif
 	dbg_print("DBG: Debug system is init!");
-
-	/* Keyring */
-	//keyring_init ();
 	
 	/* I18n */
 	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
