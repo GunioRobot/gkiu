@@ -2,7 +2,7 @@
 #define DEBUG_H
 
 // If debug
-//#define DEBUG
+#define DEBUG
 
 // Infomation to...
 enum

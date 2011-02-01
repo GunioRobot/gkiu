@@ -1,13 +1,13 @@
 = GKiu 说明文档 =
 Mike Ma <zhtx10@gmail.com>
-0.1a, Jan 30, 2011
+0.1a, Feb 1, 2011
 
 NOTE: 此文档先不动笔
 
 == 发现了BUG？要提交新建议？ ==
 发现了BUG？
 要提交新建议？
-请都反馈到 http:github.com/gqqdev/gkiu/issues[项目任务单] 中！
+请都反馈到 https:github.com/gqqdev/gkiu/issues[项目任务单] 中！
 我们的开发者非常需要你的回馈！（尤其是在开发进程中时，这时功能还比较少，
 要修改还算方便，到已发布后，gdb估计都调不出来了）
 

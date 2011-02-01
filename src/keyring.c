@@ -25,8 +25,6 @@
 #include "i18n.h"
 #include "keyring.h"
 
-/* TODO: 这些函数待测试 */
-
 /**
  Save a password to default keyring.
  */
@@ -34,8 +32,9 @@ static void
 save_callback (GnomeKeyringResult result,
                gpointer data)
 {
-	g_warning (_("Couldn't save the password. %s"),
-	           gnome_keyring_result_to_message (result));
+	if (result != GNOME_KEYRING_RESULT_OK)
+		g_warning (_("Couldn't save the password. %s"),
+		           gnome_keyring_result_to_message (result));
 }
 void 
 keyring_savepwd (const char *usr, 
@@ -55,51 +54,32 @@ keyring_savepwd (const char *usr,
 /**
  Find the password of a user
  */
-static void
-find_callback (GnomeKeyringResult result,
-               const gchar *pwd,
-               gpointer data)
-{
-	if (result == GNOME_KEYRING_RESULT_OK)
-	{
-		strcpy (data, pwd);
-	}
-	else
-	{
-		strcpy (data, "");
-	}
-}
 void
 keyring_findpwd (const char *usr, 
-                 char *pwd_buf)
+                 char **pwd_buf)
 {
-	gnome_keyring_find_password (GNOME_KEYRING_NETWORK_PASSWORD,
-	                             &find_callback,
-	                             pwd_buf, NULL,
-	                             "user", usr,
-	                             "server", "gkiu",
-	                             NULL);
+	gnome_keyring_find_password_sync (GNOME_KEYRING_NETWORK_PASSWORD,
+	                                  pwd_buf, 
+	                                  "user", usr, 
+	                                  "server", "gkiu",
+	                                  NULL);
 }
 /**
  Delete a password from default keyring
  */
-static void
-del_callback (GnomeKeyringResult result,
-              gpointer data)
-{
-	if (result != GNOME_KEYRING_RESULT_OK)
-	{
-		g_warning (_("Couldn't delete the password.%s"),
-		           gnome_keyring_result_to_message (result));
-	}
-}
+
 void 
 keyring_delpwd (const char *usr)
 {
-	gnome_keyring_delete_password (GNOME_KEYRING_NETWORK_PASSWORD,
-	                               &del_callback,
-	                               NULL, NULL,
-	                               "user", usr,
-	                               "server", "gkiu",
-	                               NULL);
+	g_print ("%s\n", usr);
+	int ret =
+	gnome_keyring_delete_password_sync (GNOME_KEYRING_NETWORK_PASSWORD,
+	                                    "user", usr,
+	                                    "server", "gkiu",
+	                                    NULL);
+	if (ret != GNOME_KEYRING_RESULT_OK)
+	{
+		g_warning (_("Couldn't delete the password. %s"),
+		           gnome_keyring_result_to_message (ret));
+	}
 }
