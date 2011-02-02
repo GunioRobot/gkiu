@@ -33,7 +33,7 @@ FILE *flog = NULL;
 FILE *
 log_open()
 {
-	GString *path = cfg_getdir ();
+	GString *path = cfg_getdir (); /* May not be free */
 	g_string_append (path, "/applog");
 	fflush(stdout);
 	flog = fopen (path->str, "w+");

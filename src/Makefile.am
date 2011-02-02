@@ -32,7 +32,9 @@ gkiu_SOURCES = \
 	uilogin.h \
 	i18n.h \
 	keyring.h \
-	keyring.c
+	keyring.c \
+	chatlog.c \
+	chatlog.h
 
 gkiu_LDFLAGS = \
 	-Wl,--export-dynamic

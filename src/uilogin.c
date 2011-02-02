@@ -74,6 +74,8 @@ on_btn_login_clicked(GtkWidget *widget,
 		dbg_print ("DBG: Will save the password.");
 		keyring_savepwd (user->str,gtk_entry_get_text (GTK_ENTRY (ety_pwd)));
 	}
+
+	g_string_free (user, TRUE);
 	
 /* THERE IS TEST CODE
 	char *pwd;

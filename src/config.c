@@ -1,3 +1,4 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
  * config.c
  *
@@ -25,7 +26,7 @@
 
 GString *cfg_dir = NULL;
 GString *cfg_file= NULL;
-GKeyFile* fcfg    = NULL;
+GKeyFile* fcfg   = NULL;
 
 /**
  Init Config
@@ -134,6 +135,8 @@ cfg_save ()
 void
 cfg_close()
 {
+	g_string_free (cfg_file, TRUE);
+	g_string_free (cfg_dir, TRUE);
 	g_key_file_free (fcfg);
 }
 

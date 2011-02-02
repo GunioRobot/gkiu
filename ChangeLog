@@ -1,3 +1,6 @@
+2011-02-02 Mike Ma <zhtx10@gmail.com>
+ * 解决多处GString内存泄露
+
 2011-02-01 Mike Ma <zhtx10@gmail.com>
  * GKiu nightly 20110201
  * 正式支持密钥环操作（暂未链接至GUI）。
