@@ -24,9 +24,10 @@
 #include "i18n.h"
 #include "config.h"
 
-GString *cfg_dir = NULL;
-GString *cfg_file= NULL;
-GKeyFile* fcfg   = NULL;
+GString *cfg_dir = NULL;	/* ~/.gkiu				*/
+GString *cfg_usrdir=NULL;   /* ~/.gkiu/users/xxxxx  */
+GString *cfg_file= NULL;	/* ~/.gkiu/gkiu.conf	*/
+GKeyFile* fcfg   = NULL;	/* ~/.gkiu/applog	    */
 
 /**
  Init Config
@@ -55,31 +56,53 @@ cfg_init ()
 /**
  Does the computer have my config dir?
  If yes, it will return 0.
+ (Must check all the directory)
  */
 void 
 cfg_chkdir()
 {
 	cfg_dir = g_string_new (g_get_home_dir ());
 	g_string_append(cfg_dir, "/.gkiu");
+
 	if (cfg_dir == NULL)
 	{
 		g_error (_("Pointer is NULL!"));
 		_exit(2);
 	}
+
+	/* Check config directory */
 	if (g_mkdir_with_parents(cfg_dir->str, 0777)!=0 )
 	{
 		g_error ( _("Could not create config directory: %s!"), cfg_dir->str);
 		_exit(1);
 	}
+	
+	/* Check users' directory */
+	GString *tmp = g_string_new (cfg_dir->str);
+	g_string_append (tmp, "/users");
+	if (g_mkdir_with_parents(tmp->str, 0777) != 0)
+	{
+		g_error (_("Could not create config directory: %s!"), tmp->str);
+		_exit (1);
+	}
+	g_string_free (tmp, TRUE);
 }
 
 /**
- Get config dir
+ Check the directory of current user
  */
-GString *
-cfg_getdir ()
+void
+cfg_chkusrdir (const char *user)
 {
-	return cfg_dir;
+	cfg_usrdir = g_string_new (cfg_dir->str);
+	g_string_append (cfg_usrdir, "/users/");
+	g_string_append (cfg_usrdir, user);
+
+	if (g_mkdir_with_parents (cfg_usrdir->str, 0777)!=0)
+	{
+		g_error (_("Could not create config directory: %s"), cfg_usrdir->str);
+		_exit (1);
+	}
 }
 
 /**
@@ -106,6 +129,23 @@ cfg_chkcfg()
 		}
 		fclose (fp);
 	}
+}
+/**
+ Get config dir
+ */
+GString *
+cfg_getdir ()
+{
+	return cfg_dir;
+}
+
+/**
+ Get the dir of current user
+ */
+GString *
+cfg_getusrdir ()
+{
+	return cfg_usrdir;
 }
 
 /**
@@ -137,6 +177,7 @@ cfg_close()
 {
 	g_string_free (cfg_file, TRUE);
 	g_string_free (cfg_dir, TRUE);
+	g_string_free (cfg_usrdir, TRUE);
 	g_key_file_free (fcfg);
 }
 
