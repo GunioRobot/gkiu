@@ -12,10 +12,13 @@ NOTE: 此文档先不动笔
 
 == 如何建立编译环境？ ==
 在Fedora/红旗Linux上（yum系）：
+
 *sudo yum install gtk2-devel gdbm-devel glib-devel
 
 在Ubuntu/Debian上（apt系）：
+
 * sudo apt-get install libgtk2-dev libgdbm-dev libglib-dev
+
 （这是我猜的命令，如果有误Ubuntu/Debian，请在
 http:github.com/gqqdev/gkiu/issues[项目任务单]反馈）
 
