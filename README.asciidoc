@@ -4,6 +4,30 @@ Mike Ma <zhtx10@gmail.com>
 
 NOTE: 此文档先不动笔
 
+== 依赖 ==
+. gtk2-devel （图形界面引擎，没有它就没有界面！不久后就会变成gtk3，但还要几个月）
+. gnome-keyring-devel （密钥环，没有它你就不能*安全地*存密码）
+. glib-devel （各种有用的东西。gtk2也需要它。）
+. gdbm-devel （数据库，没有它你就不能存聊天记录。）
+
+== 如何建立编译环境？ ==
+在Fedora/红旗Linux上（yum系）：
+[source,shell]
+------------------------
+sudo yum install gtk2-devel gdbm-devel glib-devel
+------------------------
+
+在Ubuntu/Debian上（apt系）：
+[source,shell]
+-------------------------
+sudo apt-get install libgtk2-dev libgdbm-dev libglib-dev
+-------------------------
+（这是我猜的命令，如果有误Ubuntu/Debian，请在
+http:github.com/gqqdev/gkiu/issues[项目任务单]反馈）
+
+== 已经测试的运行环境 ==
+Fedora 14 (GNOME，源：搜狐、163)
+
 == 发现了BUG？要提交新建议？ ==
 发现了BUG？
 要提交新建议？
@@ -15,3 +39,10 @@ NOTE: 此文档先不动笔
 * 支持保存用户列表
 * 支持读入用户列表
 * 更加稳定
+
+== 要加入我们？ ==
+先看看我们需要哪些人
+. 你会GTK+？
+. 会CSS？
+. 还是会GIMP？ 
+嗯，只要你是以上其一，请发送邮件到：zhtx<@>gmail.com （把<@>修改为@，别弄错咯）

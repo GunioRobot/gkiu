@@ -37,7 +37,7 @@ AM_PROG_LIBTOOL
 
 
 
-PKG_CHECK_MODULES(GKIU, [glib-2.0 >= 2.18 gnome-keyring-1 gtk+-2.0 gio-2.0])
+PKG_CHECK_MODULES(GKIU, [glib-2.0 >= 2.18 gnome-keyring-1 gtk+-2.0])
 
 
 

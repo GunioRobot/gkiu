@@ -17,3 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+/* TODO: 完成存密码 */
+
+#include <glib.h>
+#include <gdbm.h> /* database */
+#include "config.h"
