@@ -23,3 +23,39 @@
 #include <glib.h>
 #include <gdbm.h> /* database */
 #include "config.h"
+
+GString *cht_dir=NULL;
+GDBM_FILE cht_obj;
+gboolean success=FALSE;
+
+void
+cht_chkdir ()
+{
+	cht_dir = g_string_new (cfg_getusrdir()->str);
+	g_string_append (cht_dir, "/chatlog");
+}
+
+GString *
+cht_getdir ()
+{
+	return cht_dir;
+}
+
+void 
+cht_open (const char *to)
+{
+	GString
+	cht_obj = gdbm_open ();
+}
+
+void 
+cht_add (const chat *to,
+         const char *msg)
+{
+	/* TODO: 考虑多人时如何写数据 */
+}
+
+void
+cht_close ()
+{
+}

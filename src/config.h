@@ -32,7 +32,9 @@
  */
 void cfg_init ();
 void cfg_chkdir();
+void cfg_chkusrdir();
 GString *cfg_getdir();
+GString *cfg_getusrdir();
 void cfg_chkcfg();
 void cfg_save ();
 void cfg_close();
