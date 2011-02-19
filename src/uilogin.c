@@ -1,3 +1,4 @@
+
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
  * uilogin.c
@@ -46,16 +47,20 @@ GtkWidget* chb_svpwd = NULL;	/*GtkCheckButton*/
 GtkWidget* chb_apoffline=NULL;  /*GtkCheckButton*/
 
 /**
- cbb_usr callback : for get UsrList
+   get_usrlist_cb:
+   @usr: The user name.
  */
 void
-get_usrlist(gchar *usr)
+get_usrlist_cb(gchar *usr)
 {
 	gtk_combo_box_append_text (GTK_COMBO_BOX (cbb_usr), usr);
 }
 
 /**
- btn_login callback : (signal) clicked
+   on_btn_login_clicked: 
+   @widget: The widget.
+   @data: user data.
+   btn_login (signal) clicked callback
  */
 void
 on_btn_login_clicked(GtkWidget *widget,
@@ -88,7 +93,10 @@ on_btn_login_clicked(GtkWidget *widget,
 }
 
 /**
- btn_cancel Callback : (Signal) clicked
+   on_btn_cancel_clicked:
+   @widget: the widget.
+   @data: user data.
+   btn_cancel (Signal) clicked callback
  */
 void
 on_btn_cancel_clicked(GtkWidget *widget,
@@ -98,7 +106,10 @@ on_btn_cancel_clicked(GtkWidget *widget,
 }
 
 /**
- * Login Window Callback : (Signal) Destroy
+   lw_destory:
+   @widget: the widget.
+   @data: user data.
+   login window (Signal) Destroy callback.
  */
 void
 lw_destroy(GtkWidget *widget,
@@ -108,7 +119,9 @@ lw_destroy(GtkWidget *widget,
 }
 
 /**
- * create login window
+   lw_create:
+   create login window.
+   Return value: The widget pointer of login window.
  */
 GtkWidget*
 lw_create(void)
@@ -143,7 +156,7 @@ lw_create(void)
 	GtkListStore *usr_lst = gtk_list_store_new (1, G_TYPE_STRING);
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbb_usr), GTK_TREE_MODEL (usr_lst));
 	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(cbb_usr), 0); 
-	cfg_get_lists_usrlist (&get_usrlist);
+	cfg_get_lists_usrlist (&get_usrlist_cb);
 	
 	g_object_unref (builder);
 

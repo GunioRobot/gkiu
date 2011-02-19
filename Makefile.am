@@ -29,4 +29,4 @@ DISTCLEANFILES = intltool-extract \
 
 # Remove doc directory on uninstall
 uninstall-local:
-	-rm -r $(gkiudocdir)
+	-rm -r $(gkiudoc)

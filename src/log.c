@@ -28,7 +28,10 @@
 FILE *flog = NULL;
 
 /**
- Open the log file
+   log_open:
+   Open the log file
+
+   Return value: If opened, return FILE pointer. Or exit application.
  */
 FILE *
 log_open()
@@ -46,7 +49,10 @@ log_open()
 }
 
 /**
- Write to log file
+   log_print:
+   @str: String will write.
+   Write String to log file.
+   Return value: See #RetureValue of #log_print_ex().
  */
 int
 log_print(char *str)
@@ -55,7 +61,11 @@ log_print(char *str)
 }
 
 /**
- Write to log file (Need file pointer)
+   log_print_ex:
+   @str: the string will write.
+   @fp: Write to.
+   Write to log file (Need file pointer)
+   Return value: Less than 0 means failed.
  */
 int
 log_print_ex(char *str, 
@@ -67,7 +77,9 @@ log_print_ex(char *str,
 }
 
 /**
- Close log file
+   log_close:
+   Close log file.
+   Return Value: Less than 0 means failed.
  */
 int
 log_close()

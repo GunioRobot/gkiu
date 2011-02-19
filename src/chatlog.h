@@ -17,3 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef CHATLOG_H
+#define CHATLOG_H
+
+void cht_chkdir();
+GString *cht_getdir();
+void cht_open();
+GDBM_FILE cht_getdbobj();
+void cht_add (char *from, char *to, char *msg);
+void cht_fetchall(void (*callback)(gchar *info, gchar *msg));
+void cht_del ();
+void cht_close (gboolean block);
+
+#endif

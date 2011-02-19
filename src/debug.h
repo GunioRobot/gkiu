@@ -29,7 +29,7 @@ enum
 {
 	DBG_TERM, /* -> stdout         */
 	DBG_FLOG, /* -> ~/.gkiu/applog */
-	DBG_NONE  /* -> ???            */
+	DBG_NONE  /* -> /dev/null      */
 };
 
 // functions

@@ -30,7 +30,8 @@ GString *cfg_file= NULL;	/* ~/.gkiu/gkiu.conf	*/
 GKeyFile* fcfg   = NULL;	/* ~/.gkiu/applog	    */
 
 /**
- Init Config
+   cfg_init:
+   Init Config
  */
 void
 cfg_init ()
@@ -54,9 +55,8 @@ cfg_init ()
 }
 
 /**
- Does the computer have my config dir?
- If yes, it will return 0.
- (Must check all the directory)
+   cfg_chkdir:
+   Looking for directory this app needed. If any doesn't exist, create it.
  */
 void 
 cfg_chkdir()
@@ -106,7 +106,8 @@ cfg_chkusrdir (const char *user)
 }
 
 /**
- Check config file
+   cfg_chkcfg:
+   Check config file
  */
 void
 cfg_chkcfg()
@@ -131,7 +132,9 @@ cfg_chkcfg()
 	}
 }
 /**
- Get config dir
+   cfg_getdir:
+   Get config dir
+   Return value: config directory in GString pointer.
  */
 GString *
 cfg_getdir ()
@@ -140,7 +143,8 @@ cfg_getdir ()
 }
 
 /**
- Get the dir of current user
+   cfg_getusrdir:
+   Get the dir of current user
  */
 GString *
 cfg_getusrdir ()
@@ -149,7 +153,9 @@ cfg_getusrdir ()
 }
 
 /**
- Save config file
+   cfg_save:
+   Save the config sets in buffer to config file.
+   You should call it if modify any config.
  */
 void
 cfg_save ()
@@ -170,7 +176,9 @@ cfg_save ()
 }
 
 /**
- Close config file
+   cfg_close:
+   Close config file
+   Should call once
  */
 void
 cfg_close()
@@ -186,7 +194,9 @@ cfg_close()
    -------------------------------------- */
 
 /**
- Get <Lists - UsrList>
+   cfg_get_lists_usrlist:
+   @callback: If found any usr, call it, cannot be NULL.
+   Get config <Lists - UsrList>
  */
 void
 cfg_get_lists_usrlist (void (*callback)(gchar *usr))
@@ -203,7 +213,10 @@ cfg_get_lists_usrlist (void (*callback)(gchar *usr))
 }
 
 /**
- Set <Lists - UsrList>
+   cfg_set_lists_usrlist:
+   @list: The usr list.
+   @len: How many user saved in the list.
+   Set <Lists - UsrList>
  */
 void
 cfg_set_lists_usrlist (gchar **list,
@@ -212,7 +225,10 @@ cfg_set_lists_usrlist (gchar **list,
 	g_key_file_set_string_list (fcfg, CFG_LISTS, CFG_LISTS_USRLIST, list, len);
 	cfg_save ();
 }
-
+/**
+   cfg_add_user_to_list:
+   @usrnam: The user name will save.
+ */
 void
 cfg_add_user_to_list (char *usrnam)
 {

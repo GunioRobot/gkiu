@@ -25,7 +25,8 @@
 int infoto;
 
 /**
- Init debug system.
+   dbg_init:
+   @to: debug message print to
  */
 void
 dbg_init(int to)
@@ -38,7 +39,9 @@ dbg_init(int to)
 }
 
 /**
- Print debug info.
+   dbg_print:
+   @str: debug message
+   Print debug info.
  */
 void
 dbg_print(char *str)
@@ -56,6 +59,10 @@ dbg_print(char *str)
 	}
 }
 
+/**
+   dbg_close:
+   Close debug system.
+ */
 void
 dbg_close()
 {

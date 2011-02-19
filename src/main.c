@@ -31,7 +31,10 @@
 #include "uilogin.h"
 
 /**
- * Main Function
+   main:
+   @argc: arg number. (for GTK+)
+   @argv: arg. (for GTK+)
+   The main function.
  */
 int
 main (int argc, 

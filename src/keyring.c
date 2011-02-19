@@ -27,7 +27,10 @@
 #include "keyring.h"
 
 /**
- Save a password to default keyring.
+   keyring_savepwd:
+   @usr: user name.
+   @pwd: the password of the user.
+   Save a password to default keyring.
  */
 static void
 save_callback (GnomeKeyringResult result,
@@ -56,7 +59,10 @@ keyring_savepwd (const char *usr,
 }
 
 /**
- Find the password of a user
+   keyring_findpwd:
+   @usr: username.
+   @pwd_buf: password buffer for getting password.
+   Find the password of a user
  */
 void
 keyring_findpwd (const char *usr, 
@@ -70,7 +76,9 @@ keyring_findpwd (const char *usr,
 }
 
 /**
- Delete a password from default keyring
+   keyring_delpwd:
+   @usr: the username
+   Delete a password from default keyring
  */
 void 
 keyring_delpwd (const char *usr)
