@@ -20,6 +20,14 @@
 #ifndef CHATLOG_H
 #define CHATLOG_H
 
+struct dbdb /* for database data */
+{
+	datum key;
+	datum context;
+	char *from;
+	char *to;
+};
+
 void cht_chkdir();
 GString *cht_getdir();
 void cht_open();

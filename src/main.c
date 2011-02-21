@@ -41,7 +41,7 @@ main (int argc,
       char *argv[])
 {
  	GtkWidget *lw_window;
-
+	/* -- Start to init -- */
 	/* Config */
 	cfg_init ();
 	
@@ -59,7 +59,14 @@ main (int argc,
 	textdomain (GETTEXT_PACKAGE);
 	gtk_set_locale ();
 	
-	/* Init GTK+ */
+	/* Threads */
+	g_thread_init (NULL);
+	if (!g_thread_supported ())
+	{
+		dbg_print ("ERR: cannot init GThread.");
+	}
+
+	/* GTK+ */
 	gtk_init (&argc, &argv);
 
 	/* Show login window */

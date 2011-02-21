@@ -30,6 +30,8 @@ GString *cht_dir=NULL;
 GDBM_FILE cht_file;
 gboolean success=FALSE;
 
+static GMutex *mutex = NULL;/* lock gdbm object */
+
 /* TODO: 测试这些函数 */
 
 /**
@@ -66,12 +68,6 @@ cht_getdir ()
 void 
 cht_open (const char *to)
 {
-	/* 如果还在一个处理，先暂停1秒 */
-	while (cht_file)
-	{
-		g_usleep (1 * G_USEC_PER_SEC);
-	}
-
 	GString *filename=g_string_new ("");
 	g_string_printf (filename, "%s/chat_with_%s", cht_dir->str, to);
 	if ((cht_file = gdbm_open(filename->str, -1, GDBM_WRCREAT, 0777, NULL)) == NULL)
@@ -95,6 +91,41 @@ cht_getdbobj ()
 	return cht_file;
 }
 
+
+/**
+   add_callback_handler:
+   @s_data: a dbdb pointer.
+   WARNING!! You should not call this by yourself.
+ */
+static gpointer /* NULL: successful */
+add_callback_handler (void *s_data)
+{
+	struct dbdb *data = (struct dbdb *)s_data;
+
+    g_mutex_lock (mutex); /* LOCK!! If this mutex has been lock, wait for unlock */
+	/* write */
+	cht_open (data->to);
+	if (!success)
+	{
+		dbg_print("DBG: failed to open chatlog file.");
+		return (gpointer)!NULL;
+	}
+	
+	/* if this key already exist, replace it */
+	if (gdbm_store (cht_file, data->key, data->context, GDBM_REPLACE))
+	{
+		dbg_print ("DBG: failed to save message.");
+		return (gpointer)!NULL;
+	}
+	cht_close (FALSE); /* just kill current action. */
+	g_mutex_unlock (mutex);
+
+	/* free memory, but not useful. */
+	/*g_mutex_free (mutex);
+	mutex = NULL;*/
+	
+	return NULL;
+}
 /**
    cht_add:
    @from: the writer of this message.
@@ -108,25 +139,24 @@ cht_add (char *from,
 		 char *to,
          char *msg)
 {
-	g_return_if_fail ((cht_file != NULL) && success);
-
 	GString *tmstr = g_string_new ("");
 	datum key, context;
 	time_t timeval;
 	struct tm *tmbuf;
+	struct dbdb data;
 	
 	time (&timeval);
 	tmbuf = localtime (&timeval);
 
 	/* format */
-	g_string_printf (tmstr, "%d-%d-%d %d:%d:%d %s -> %s", 
-					 tmbuf->tm_year + 1900,
+	g_string_printf (tmstr, _("Month %d Day %d, %d. %d:%d:%d from %s to %s"), 
 					 tmbuf->tm_mon + 1,
 					 tmbuf->tm_mday,
+					 tmbuf->tm_year + 1900,
 					 tmbuf->tm_hour,
 					 tmbuf->tm_min,
 					 tmbuf->tm_sec,
-					 to, from);
+					 from, to);
 
 	key.dptr = tmstr->str;
 	key.dsize = tmstr->len;
@@ -134,12 +164,16 @@ cht_add (char *from,
 	context.dptr = msg;
 	context.dsize = strlen (msg);
 
-	/* write data. */
-	cht_open (to);
-	gdbm_store (cht_file, key, context, GDBM_REPLACE); /* if this key already exist, replace it */
-	cht_close (FALSE); /* just kill current action. */
-
 	g_string_free (tmstr, TRUE);
+
+	/* Thread */
+	data.key     = key;
+	data.context = context;
+	data.from    = from;
+	data.to      = to;
+
+	if (!mutex) mutex = g_mutex_new ();
+	g_thread_create (&add_callback_handler, (void *)&data, FALSE, NULL);
 }
 
 /**
@@ -172,7 +206,7 @@ cht_del()
 
 	/* TODO: complete this function */
 }
-\
+
 /**
    cht_close:
    @block: if set to TRUE, free all allocated memories, and close database completely, should use if app will end. if set to FALSE, only close database object.
