@@ -24,6 +24,7 @@
 #include <gdbm.h> /* database */
 #include "i18n.h"
 #include "config.h"
+#include "debug.h"
 #include "chatlog.h"
 
 GString *cht_dir=NULL;
@@ -42,6 +43,7 @@ static GMutex *mutex = NULL;/* lock gdbm object */
 void
 cht_chkdir ()
 {
+	/* copy */
 	cht_dir = g_string_new (cfg_getusrdir()->str);
 	g_string_append (cht_dir, "/chatlog");
 }
@@ -108,7 +110,7 @@ add_callback_handler (void *s_data)
 	if (!success)
 	{
 		dbg_print("DBG: failed to open chatlog file.");
-		return (gpointer)!NULL;
+		return (gpointer) !NULL;
 	}
 	
 	/* if this key already exist, replace it */
@@ -197,14 +199,18 @@ cht_fetchall(void (*callback)(gchar *info, gchar *msg))
 
 /**
    cht_del:
+   @pkey:The string of the key.
    Delete a message from database.
 */
 void 
-cht_del()
+cht_del(gchar *pkey)
 {
-	g_return_if_fail ((cht_file != NULL) && success);
-
-	/* TODO: complete this function */
+	struct datum keys;
+	g_return_if_fail (pkey != NULL);
+	keys.dptr = pkey;
+	keys.dptr = strlen (pkey);
+	if (gdbm_delete (cht_file, keys))
+		dbg_print ("Failed to delete the chatlog entry.");
 }
 
 /**

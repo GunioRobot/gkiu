@@ -1,7 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-## Created by Anjuta
-
 uidir = $(datadir)/gkiu/ui
 ui_DATA = \
 	uilogin.glade\
@@ -39,7 +37,7 @@ gkiu_SOURCES = \
 gkiu_LDFLAGS = \
 	-Wl,--export-dynamic
 
-gkiu_LDADD = $(GKIU_LIBS)
+gkiu_LDADD = @GKIU_LIBS@
 
 EXTRA_DIST = $(ui_DATA)
 

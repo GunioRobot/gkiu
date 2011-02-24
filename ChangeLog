@@ -1,7 +1,14 @@
+2011-02-24 Mike Ma <zhtx10@gmail.com>
+	* 改进 完成 cht_del() 函数。
+	* 改进 可以成功使用典型autotools方式编译。
+	       ./configure; make; make install
+	* 改进 彻底移除Anjuta模块。
+	* 发布 GKiu nightly 20110224
+
 2011-02-21 Mike Ma <zhtx10@gmail.com>
 	* 增加 多线程数据库写入（基于GLib的线程库和互斥锁）。
 	* 发布 GKiu nightly 20110221
-	
+
 2011-02-19 Mike Ma <zhtx10@gmail.com>
 	* 增加 初步的聊天记录保存（未测试）。
 	* 增加 对所有函数的完整注释（未测试）。

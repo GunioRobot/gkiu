@@ -222,7 +222,7 @@ void
 cfg_set_lists_usrlist (gchar **list,
                        gsize len)
 {
-	g_key_file_set_string_list (fcfg, CFG_LISTS, CFG_LISTS_USRLIST, list, len);
+	g_key_file_set_string_list (fcfg, CFG_LISTS, CFG_LISTS_USRLIST, (const gchar *const *)list, len);
 	cfg_save ();
 }
 /**

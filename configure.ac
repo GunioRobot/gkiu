@@ -1,6 +1,3 @@
-dnl Process this file with autoconf to produce a configure script.
-dnl Created by Anjuta application wizard.
-
 AC_INIT(gkiu, 0.0, http://github.com/gqqdev/gkiu)
 
 PACKAGE_LOCALE_DIR="$(datadir)/locale"
@@ -17,28 +14,27 @@ AM_MAINTAINER_MODE
 
 AC_PROG_CC
 
-
-
-
-dnl ***************************************************************************
-dnl Internatinalization
-dnl ***************************************************************************
+# ***************************************************************************
+# Internatinalization
+# ***************************************************************************
 
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT gkiu])
 AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
 
-dnl Add the languages which your application supports here.
+# Add the languages which your application supports here.
 ALL_LINGUAS="zh_CN"
 ALL_GLIB_GNU_GETTEXT
 
 AM_PROG_LIBTOOL
 
 
-
+#######################
+#  check libraries    #
+#######################
 PKG_CHECK_MODULES(GKIU, [glib-2.0 >= 2.18 gnome-keyring-1 gtk+-2.0])
-
+AC_CHECK_LIB([gdbm],[gdbm_store])
 
 
 ##################################################

@@ -2,6 +2,7 @@
 ## Created by Anjuta
 
 SUBDIRS = src po
+GKIU_LIBS = -lgdbm
 
 gkiudocdir = ${prefix}/doc/gkiu
 gkiudoc_DATA = \

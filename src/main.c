@@ -77,6 +77,8 @@ main (int argc,
 	/* Clean up */
 	dbg_close (); /* it will call log_close() */
 	cfg_close ();
+
+	printf ("good bye.");
 	
 	return 0;
 }

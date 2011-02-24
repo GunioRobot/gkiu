@@ -34,7 +34,7 @@ void cht_open();
 GDBM_FILE cht_getdbobj();
 void cht_add (char *from, char *to, char *msg);
 void cht_fetchall(void (*callback)(gchar *info, gchar *msg));
-void cht_del ();
+void cht_del (gchar *pkey);
 void cht_close (gboolean block);
 
 #endif
