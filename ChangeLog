@@ -1,3 +1,6 @@
+2011-03-01 Mike Ma <zhtx10@gmail.com>
+	* 移除 log和debug，决定重写。
+
 2011-02-24 Mike Ma <zhtx10@gmail.com>
 	* 改进 完成 cht_del() 函数。
 	* 改进 可以成功使用典型autotools方式编译。
