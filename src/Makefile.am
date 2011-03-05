@@ -21,13 +21,9 @@ bin_PROGRAMS = gkiu
 gkiu_SOURCES = \
 	main.c\
 	uilogin.c \
-	log.c \
-	log.h \
+	uilogin.h \
 	config.c \
 	config.h \
-	debug.c \
-	debug.h \
-	uilogin.h \
 	i18n.h \
 	keyring.h \
 	keyring.c \

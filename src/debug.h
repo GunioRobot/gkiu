@@ -2,7 +2,7 @@
 /*
  * debug.h
  *
- * Copyright (C) 2011 - GQQ Team
+ * Copyright (C) 2011 - GQQ Team <gqq@freelists.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,23 +18,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DEBUG_H
-#define DEBUG_H
+#include <glib.h>
 
-// If debug
-#define DEBUG
-
-// Infomation to...
-enum
-{
-	DBG_TERM, /* -> stdout         */
-	DBG_FLOG, /* -> ~/.gkiu/applog */
-	DBG_NONE  /* -> /dev/null      */
-};
-
-// functions
-void dbg_init(int to);
-void dbg_print(char *dbg);
-void dbg_close();
-
-#endif
+/*
+  thinking
+ */

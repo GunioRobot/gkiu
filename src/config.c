@@ -24,10 +24,10 @@
 #include "i18n.h"
 #include "config.h"
 
-GString *cfg_dir = NULL;	/* ~/.gkiu				*/
-GString *cfg_usrdir=NULL;   /* ~/.gkiu/users/xxxxx  */
-GString *cfg_file= NULL;	/* ~/.gkiu/gkiu.conf	*/
-GKeyFile* fcfg   = NULL;	/* ~/.gkiu/applog	    */
+static GString * dir    = NULL;	/* ~/.gkiu				*/
+static GString * usrdir =NULL;	/* ~/.gkiu/users/xxxxx  */
+static GString * file   = NULL;	/* ~/.gkiu/gkiu.conf	*/
+GKeyFile* fcfg = NULL;	/* ~/.gkiu/applog	    */
 
 /**
    cfg_init:
@@ -38,18 +38,18 @@ cfg_init ()
 {
 	if ((fcfg = g_key_file_new ()) == NULL)
 	{
-		g_error (_("Pointer is NULL!"));
+		g_error ("Out of Memory!");
 		_exit (2);
 	}
 
 	cfg_chkdir ();
 	cfg_chkcfg ();
 	
-	if (g_key_file_load_from_file (fcfg, cfg_file->str,
+	if (g_key_file_load_from_file (fcfg, file->str,
 	                               G_KEY_FILE_NONE,
 	                               NULL) == FALSE)
 	{
-		g_error (_("Could not read config file: %s!"), cfg_file->str);
+		g_error (_("Could not read config file: %s!"), file->str);
 		_exit (1);
 	}
 }
@@ -61,24 +61,24 @@ cfg_init ()
 void 
 cfg_chkdir()
 {
-	cfg_dir = g_string_new (g_get_home_dir ());
-	g_string_append(cfg_dir, "/.gkiu");
+	dir = g_string_new (g_get_home_dir ());
+	g_string_append(dir, "/.gkiu");
 
-	if (cfg_dir == NULL)
+	if (dir == NULL)
 	{
 		g_error (_("Pointer is NULL!"));
 		_exit(2);
 	}
 
 	/* Check config directory */
-	if (g_mkdir_with_parents(cfg_dir->str, 0777)!=0 )
+	if (g_mkdir_with_parents(dir->str, 0777)!=0 )
 	{
-		g_error ( _("Could not create config directory: %s!"), cfg_dir->str);
+		g_error ( _("Could not create config directory: %s!"), dir->str);
 		_exit(1);
 	}
 	
 	/* Check users' directory */
-	GString *tmp = g_string_new (cfg_dir->str);
+	GString *tmp = g_string_new (dir->str);
 	g_string_append (tmp, "/users");
 	if (g_mkdir_with_parents(tmp->str, 0777) != 0)
 	{
@@ -94,13 +94,13 @@ cfg_chkdir()
 void
 cfg_chkusrdir (const char *user)
 {
-	cfg_usrdir = g_string_new (cfg_dir->str);
-	g_string_append (cfg_usrdir, "/users/");
-	g_string_append (cfg_usrdir, user);
+	usrdir = g_string_new (dir->str);
+	g_string_append (usrdir, "/users/");
+	g_string_append (usrdir, user);
 
-	if (g_mkdir_with_parents (cfg_usrdir->str, 0777)!=0)
+	if (g_mkdir_with_parents (usrdir->str, 0777)!=0)
 	{
-		g_error (_("Could not create config directory: %s"), cfg_usrdir->str);
+		g_error (_("Could not create config directory: %s"), usrdir->str);
 		_exit (1);
 	}
 }
@@ -113,19 +113,19 @@ void
 cfg_chkcfg()
 {
 	FILE *fp = NULL;
-	cfg_file = g_string_new (cfg_dir->str);
-	if(!cfg_file)
+	file = g_string_new (dir->str);
+	if(!file)
 	{
-		g_error (_("Pointer is NULL!"));
+		g_error ("Out of Memory!");
 		_exit(2);
 	}
-	g_string_append (cfg_file, "/gkiu.conf");
-	if (g_file_test (cfg_file->str, G_FILE_TEST_EXISTS) == FALSE)
+	g_string_append (file, "/gkiu.conf");
+	if (g_file_test (file->str, G_FILE_TEST_EXISTS) == FALSE)
 	{
-		fp = fopen (cfg_file->str, "w");
+		fp = fopen (file->str, "w");
 		if (fp == NULL)
 		{
-			g_error (_("Could not create config file: %s!"), cfg_file->str);
+			g_error ("Could not create config file: %s!", file->str);
 			_exit (1);
 		}
 		fclose (fp);
@@ -139,7 +139,7 @@ cfg_chkcfg()
 GString *
 cfg_getdir ()
 {
-	return cfg_dir;
+	return dir;
 }
 
 /**
@@ -149,7 +149,7 @@ cfg_getdir ()
 GString *
 cfg_getusrdir ()
 {
-	return cfg_usrdir;
+	return usrdir;
 }
 
 /**
@@ -168,9 +168,9 @@ cfg_save ()
 		_exit (1);
 	}
 
-	if (g_file_set_contents (cfg_file->str, file_buf, -1, NULL) == FALSE)
+	if (g_file_set_contents (file->str, file_buf, -1, NULL) == FALSE)
 	{
-		g_error (_("Could not save config file: %s!"), cfg_file->str);
+		g_error (_("Could not save config file: %s!"), file->str);
 		_exit (1);
 	}
 }
@@ -183,9 +183,9 @@ cfg_save ()
 void
 cfg_close()
 {
-	g_string_free (cfg_file, TRUE);
-	g_string_free (cfg_dir, TRUE);
-	g_string_free (cfg_usrdir, TRUE);
+	g_string_free (file, TRUE);
+	g_string_free (dir, TRUE);
+	g_string_free (usrdir, TRUE);
 	g_key_file_free (fcfg);
 }
 

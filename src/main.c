@@ -46,12 +46,13 @@ main (int argc,
 	cfg_init ();
 	
 	/* Debug */
-#ifdef DEBUG
+	/*#ifdef DEBUG
 	dbg_init(DBG_TERM);
 #else
 	dbg_init(DBG_FLOG);
-#endif
+	#endif
 	dbg_print("DBG: Debug system is init!");
+	*/
 	
 	/* I18n */
 	bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -63,7 +64,7 @@ main (int argc,
 	g_thread_init (NULL);
 	if (!g_thread_supported ())
 	{
-		dbg_print ("ERR: cannot init GThread.");
+		//dbg_print ("ERR: cannot init GThread.");
 	}
 
 	/* GTK+ */
@@ -75,10 +76,8 @@ main (int argc,
 	gtk_main ();
 
 	/* Clean up */
-	dbg_close (); /* it will call log_close() */
+	/*dbg_close (); it will call log_close() */
 	cfg_close ();
-
-	printf ("good bye.");
 	
 	return 0;
 }

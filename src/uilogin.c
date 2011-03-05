@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
  * uilogin.c
@@ -23,7 +22,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-
 #include <glib.h>
 #include <gtk/gtk.h>
 
@@ -40,17 +38,17 @@
 #endif
 
 
-GtkWidget* window = NULL;		/*GtkWindow*/
+static GtkWidget* window = NULL;	/*GtkWindow*/
 GtkWidget* ety_pwd = NULL;		/*GtkEntry*/
 GtkWidget* cbb_usr = NULL;		/*GtkComboBoxEntry*/
-GtkWidget* chb_svpwd = NULL;	/*GtkCheckButton*/
-GtkWidget* chb_apoffline=NULL;  /*GtkCheckButton*/
+GtkWidget* chb_svpwd = NULL;		/*GtkCheckButton*/
+GtkWidget* chb_apoffline=NULL;  	/*GtkCheckButton*/
 
 /**
    get_usrlist_cb:
    @usr: The user name.
  */
-void
+static void
 get_usrlist_cb(gchar *usr)
 {
 	gtk_combo_box_append_text (GTK_COMBO_BOX (cbb_usr), usr);
@@ -62,7 +60,7 @@ get_usrlist_cb(gchar *usr)
    @data: user data.
    btn_login (signal) clicked callback
  */
-void
+static void
 on_btn_login_clicked(GtkWidget *widget,
                      gpointer data)
 {
@@ -78,18 +76,14 @@ on_btn_login_clicked(GtkWidget *widget,
 	save_pwd = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chb_svpwd));
 	if (save_pwd == TRUE)
 	{
-		dbg_print ("DBG: Will save the password.");
+	  //dbg_print ("DBG: Will save the password.");
 		keyring_savepwd (user->str,gtk_entry_get_text (GTK_ENTRY (ety_pwd)));
 	}
-	
-/* THERE IS TEST CODE
-	char *pwd;
+	/* WILL BE MOVE *//*
 	keyring_findpwd (user->str,&pwd);
-	g_print ("Password is %s\n", pwd);
-	
+
 	keyring_delpwd (user->str);
-*/
-	g_string_free (user, TRUE);
+	g_string_free (user, TRUE);*/
 }
 
 /**
@@ -98,7 +92,7 @@ on_btn_login_clicked(GtkWidget *widget,
    @data: user data.
    btn_cancel (Signal) clicked callback
  */
-void
+static void
 on_btn_cancel_clicked(GtkWidget *widget,
                       gpointer data)
 {
@@ -111,7 +105,7 @@ on_btn_cancel_clicked(GtkWidget *widget,
    @data: user data.
    login window (Signal) Destroy callback.
  */
-void
+static void
 lw_destroy(GtkWidget *widget,
            gpointer data)
 {
@@ -125,7 +119,7 @@ lw_destroy(GtkWidget *widget,
  */
 GtkWidget*
 lw_create(void)
-{	
+{
 	GtkBuilder *builder;
 	GError* error = NULL;
 
@@ -160,6 +154,6 @@ lw_create(void)
 	
 	g_object_unref (builder);
 
-	dbg_print("DBG: Login Window is created.");
+	//dbg_print("DBG: Login Window is created.");
 	return window;
 }

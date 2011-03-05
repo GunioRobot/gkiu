@@ -18,54 +18,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include "log.h"
-#include "debug.h"
+#include <glib.h>
 
-int infoto;
-
-/**
-   dbg_init:
-   @to: debug message print to
+/*
+  thinking
  */
-void
-dbg_init(int to)
-{
-	infoto = to;
-	if(infoto == DBG_FLOG)
-	{
-		log_open ();
-	}
-}
-
-/**
-   dbg_print:
-   @str: debug message
-   Print debug info.
- */
-void
-dbg_print(char *str)
-{
-	switch(infoto)
-	{
-		case DBG_TERM:
-			log_print_ex(str, stdout);
-			break;
-		case DBG_FLOG:
-			log_print(str);
-			break;
-		default:
-			break;
-	}
-}
-
-/**
-   dbg_close:
-   Close debug system.
- */
-void
-dbg_close()
-{
-	if(infoto == DBG_FLOG)
-		log_close();
-}
