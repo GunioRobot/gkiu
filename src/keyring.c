@@ -40,15 +40,15 @@ save_callback (GnomeKeyringResult result,
 		g_warning (_("Couldn't save the password. %s"),
 		           gnome_keyring_result_to_message (result));
 }
-void 
-keyring_savepwd (const char *usr, 
+void
+keyring_savepwd (const char *usr,
                  const char *pwd)
 {
 	GString *des = g_string_new ("");
 	g_string_sprintf (des, "GKiu_%s", usr);
 	gnome_keyring_store_password (GNOME_KEYRING_NETWORK_PASSWORD,
 	                              GNOME_KEYRING_DEFAULT,
-	                              des->str, pwd, 
+	                              des->str, pwd,
 	                              &save_callback,
 	                              NULL/*user data*/, NULL /*destory modify*/,
 	                              /* User attributes */
@@ -65,12 +65,12 @@ keyring_savepwd (const char *usr,
    Find the password of a user
  */
 void
-keyring_findpwd (const char *usr, 
+keyring_findpwd (const char *usr,
                  char **pwd_buf)
 {
 	gnome_keyring_find_password_sync (GNOME_KEYRING_NETWORK_PASSWORD,
-	                                  pwd_buf, 
-	                                  "user", usr, 
+	                                  pwd_buf,
+	                                  "user", usr,
 	                                  "server", "gkiu",
 	                                  NULL);
 }
@@ -80,7 +80,7 @@ keyring_findpwd (const char *usr,
    @usr: the username
    Delete a password from default keyring
  */
-void 
+void
 keyring_delpwd (const char *usr)
 {
 	int ret =

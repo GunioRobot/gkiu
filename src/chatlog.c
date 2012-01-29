@@ -37,7 +37,7 @@ static GMutex *mutex = NULL;/* lock gdbm object */
 
 /**
    cht_chkdir:
-  
+
    Looking for current user's chatlog directory.
  */
 void
@@ -50,9 +50,9 @@ cht_chkdir ()
 
 /**
    cht_getdir:
-   
+
    Get current user's chatlog directory.
-   
+
    Return value: The directory in GString pointer.
  */
 GString *
@@ -63,11 +63,11 @@ cht_getdir ()
 
 /**
    cht_open:
-   @to: The message has sent to. It needed by filename.   
+   @to: The message has sent to. It needed by filename.
    Open the database.
    Warning: Only #cht_add() can call it. You shouldn't call it.
  */
-void 
+void
 cht_open (const char *to)
 {
 	GString *filename=g_string_new ("");
@@ -84,7 +84,7 @@ cht_open (const char *to)
 /**
    cht_getdbobj:
    Get database object.
-   
+
    Return Value: A GDBM object.
 */
 GDBM_FILE
@@ -112,7 +112,7 @@ add_callback_handler (void *s_data)
 		dbg_print("DBG: failed to open chatlog file.");
 		return (gpointer) !NULL;
 	}
-	
+
 	/* if this key already exist, replace it */
 	if (gdbm_store (cht_file, data->key, data->context, GDBM_REPLACE))
 	{
@@ -125,7 +125,7 @@ add_callback_handler (void *s_data)
 	/* free memory, but not useful. */
 	/*g_mutex_free (mutex);
 	mutex = NULL;*/
-	
+
 	return NULL;
 }
 /**
@@ -146,12 +146,12 @@ cht_add (char *from,
 	time_t timeval;
 	struct tm *tmbuf;
 	struct dbdb data;
-	
+
 	time (&timeval);
 	tmbuf = localtime (&timeval);
 
 	/* format */
-	g_string_printf (tmstr, _("Month %d Day %d, %d. %d:%d:%d from %s to %s"), 
+	g_string_printf (tmstr, _("Month %d Day %d, %d. %d:%d:%d from %s to %s"),
 					 tmbuf->tm_mon + 1,
 					 tmbuf->tm_mday,
 					 tmbuf->tm_year + 1900,
@@ -183,7 +183,7 @@ cht_add (char *from,
    @callback: if get any message, call it.
    Search all messages.
 */
-void 
+void
 cht_fetchall(void (*callback)(gchar *info, gchar *msg))
 {
 	datum key, context;
@@ -202,7 +202,7 @@ cht_fetchall(void (*callback)(gchar *info, gchar *msg))
    @pkey:The string of the key.
    Delete a message from database.
 */
-void 
+void
 cht_del(gchar *pkey)
 {
 	struct datum keys;

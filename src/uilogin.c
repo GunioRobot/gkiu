@@ -3,17 +3,17 @@
 /*
  * uilogin.c
  * Copyright (C) GQQ Team <gqq@freelists.org>
- * 
+ *
  * gkiu is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * gkiu is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -57,7 +57,7 @@ get_usrlist_cb(gchar *usr)
 }
 
 /**
-   on_btn_login_clicked: 
+   on_btn_login_clicked:
    @widget: The widget.
    @data: user data.
    btn_login (signal) clicked callback
@@ -68,25 +68,25 @@ on_btn_login_clicked(GtkWidget *widget,
 {
 	/* Add the current user to list */
 	cfg_add_user_to_list (gtk_combo_box_get_active_text (GTK_COMBO_BOX (cbb_usr)));
-	
+
 	/* TODO: 这里暂未考虑已存储的密码 */
 	gboolean save_pwd = FALSE;
 	GString *user = g_string_new (gtk_combo_box_get_active_text (GTK_COMBO_BOX (cbb_usr)));
-	
+
 	cfg_chkusrdir (user->str);
-	
+
 	save_pwd = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chb_svpwd));
 	if (save_pwd == TRUE)
 	{
 		dbg_print ("DBG: Will save the password.");
 		keyring_savepwd (user->str,gtk_entry_get_text (GTK_ENTRY (ety_pwd)));
 	}
-	
+
 /* THERE IS TEST CODE
 	char *pwd;
 	keyring_findpwd (user->str,&pwd);
 	g_print ("Password is %s\n", pwd);
-	
+
 	keyring_delpwd (user->str);
 */
 	g_string_free (user, TRUE);
@@ -125,7 +125,7 @@ lw_destroy(GtkWidget *widget,
  */
 GtkWidget*
 lw_create(void)
-{	
+{
 	GtkBuilder *builder;
 	GError* error = NULL;
 
@@ -155,9 +155,9 @@ lw_create(void)
 	/* set up user combo box */
 	GtkListStore *usr_lst = gtk_list_store_new (1, G_TYPE_STRING);
 	gtk_combo_box_set_model (GTK_COMBO_BOX (cbb_usr), GTK_TREE_MODEL (usr_lst));
-	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(cbb_usr), 0); 
+	gtk_combo_box_entry_set_text_column(GTK_COMBO_BOX_ENTRY(cbb_usr), 0);
 	cfg_get_lists_usrlist (&get_usrlist_cb);
-	
+
 	g_object_unref (builder);
 
 	dbg_print("DBG: Login Window is created.");

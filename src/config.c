@@ -44,7 +44,7 @@ cfg_init ()
 
 	cfg_chkdir ();
 	cfg_chkcfg ();
-	
+
 	if (g_key_file_load_from_file (fcfg, cfg_file->str,
 	                               G_KEY_FILE_NONE,
 	                               NULL) == FALSE)
@@ -58,7 +58,7 @@ cfg_init ()
    cfg_chkdir:
    Looking for directory this app needed. If any doesn't exist, create it.
  */
-void 
+void
 cfg_chkdir()
 {
 	cfg_dir = g_string_new (g_get_home_dir ());
@@ -76,7 +76,7 @@ cfg_chkdir()
 		g_error ( _("Could not create config directory: %s!"), cfg_dir->str);
 		_exit(1);
 	}
-	
+
 	/* Check users' directory */
 	GString *tmp = g_string_new (cfg_dir->str);
 	g_string_append (tmp, "/users");
@@ -161,7 +161,7 @@ void
 cfg_save ()
 {
 	gchar *file_buf = NULL;
-	
+
 	if ((file_buf = g_key_file_to_data (fcfg,NULL,NULL)) == NULL)
 	{
 		g_error (_("Could not get config data!"));
@@ -237,7 +237,7 @@ cfg_add_user_to_list (char *usrnam)
 	GString *buf = NULL;
 	gsize len = 0;
 	gint i;
-	
+
 	lst = g_key_file_get_string_list (fcfg, CFG_LISTS, CFG_LISTS_USRLIST,
 	                                  &len, NULL);
 	if (!lst)
@@ -250,7 +250,7 @@ cfg_add_user_to_list (char *usrnam)
 			return;
 		}
 	}
-	
+
 	tmp = g_key_file_get_string (fcfg, CFG_LISTS, CFG_LISTS_USRLIST, NULL);
 	buf = g_string_new (tmp);
 	g_string_append (buf, usrnam);

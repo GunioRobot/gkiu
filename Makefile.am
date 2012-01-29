@@ -20,7 +20,7 @@ INTLTOOL_FILES = intltool-extract.in \
 
 EXTRA_DIST = $(gkiudoc_DATA) \
 	$(INTLTOOL_FILES)\
-	logo.png        
+	logo.png
 
 DISTCLEANFILES = intltool-extract \
 	intltool-merge \
